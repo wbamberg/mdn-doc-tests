@@ -1,7 +1,21 @@
 const ERROR = 1;
 const WARNING = 2;
+const INFO = 3;
 
 var docTests = {
+
+  "wordCount": {
+    name: "word_count",
+    desc: "word_count_desc",
+    check: function check(content) {
+      var matches = content.replace(/<\/?.+?>/g, "").match(/\w+/g);
+      return matches.map(match => {
+        return {msg: match};
+      });
+    },
+    type: INFO,
+    errors: []
+  },
 
   "oldURLs": {
     name: "old_en_urls",

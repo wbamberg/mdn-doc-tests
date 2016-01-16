@@ -1,4 +1,6 @@
+const ERROR = 1;
 const WARNING = 2;
+const INFO = 3;
 
 addon.port.on("test", function(test, id, autoExpandErrors) {
   var tests = document.getElementById("tests");
@@ -7,10 +9,13 @@ addon.port.on("test", function(test, id, autoExpandErrors) {
   if (errorCount > 0) {
     status = test.type === WARNING ? "hasWarnings" : "hasErrors";
   }
+  if (test.type === INFO) {
+    status = "isInfo";
+  }
   var testElem = document.getElementById(id);
   if (tests.contains(testElem)) {
     testElem.getElementsByClassName("errorCount")[0].textContent = errorCount;
-    testElem.classList.remove("hasErrors", "hasWarnings", "ok");
+    testElem.classList.remove("hasErrors", "hasWarnings", "ok", "isInfo");
     testElem.classList.add(status);
   } else {
     var testContainer = document.createElement("li");
@@ -42,17 +47,19 @@ addon.port.on("test", function(test, id, autoExpandErrors) {
   }
 
   var errors = testElem.getElementsByClassName("errors")[0];
-  if (status === "ok") {
+  if (status === "ok" || status === "isInfo") {
     errors.classList.remove("show");
   }
   while (errors.firstChild) {
     errors.removeChild(errors.firstChild);
   }
-  test.errors.forEach(function(error) {
-    var errorContainer = document.createElement("li");
-    errorContainer.textContent = error.msg;
-    errors.appendChild(errorContainer);
-  });
+  if (test.type !== INFO) {
+    test.errors.forEach(function(error) {
+      var errorContainer = document.createElement("li");
+      errorContainer.textContent = error.msg;
+      errors.appendChild(errorContainer);
+    });
+  }
 });
 
 function getParentByClassName(node, className) {

@@ -44,6 +44,10 @@ li {
   background-color: #DBB40F;
 }
 
+.isInfo {
+  background-color: #0095DD;
+}
+
 .ok {
   background-color: #00882D;
 }

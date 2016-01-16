@@ -2,6 +2,17 @@ var testFile = require("sdk/self").data.load("doctests.js");
 
 eval(testFile);
 
+exports["test doc regexp wordCount"] = function(assert) {
+  const str = '<span>Web</span> <a href="/En/Mozilla">Mozilla</a>';
+  const expected = [
+    'Web',
+    'Mozilla'
+  ];
+  var matches = docTests["wordCount"].check(str);
+
+  assert.equal(matches.length, expected.length, "Number of words must be " + expected.length);
+};
+
 exports["test doc regexp oldURLs"] = function(assert) {
   const str = '<a href="/en/Web">Web</a><a href="/En/Mozilla">Mozilla</a>';
   const expected = [
