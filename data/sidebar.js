@@ -91,7 +91,7 @@ function updateErrorSummary() {
     totalErrorCounter.classList.remove("ok");
     totalErrorCounter.classList.add("hasErrors");
   }
-  
+
   var totalWarningCounter = document.getElementById("totalWarningCount");
   totalWarningCounter.textContent = totalWarningCount;
   if (totalWarningCount === 0) {

@@ -16,5 +16,8 @@
     "title": "Automatically expand errors",
     "type": "bool",
     "value": false
-  }]
+  }],
+  "permissions": {
+    "cross-domain-content": ["https://developer.mozilla.org"]
+  }
 }
