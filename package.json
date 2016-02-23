@@ -16,5 +16,8 @@
     "title": "Automatically expand errors",
     "type": "bool",
     "value": false
-  }]
+  }],
+  "permissions": {
+    "private-browsing": true
+  }
 }
